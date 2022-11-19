@@ -2,6 +2,9 @@ library(DescTools)
 
 library(reshape2)
 library(ggplot2)
+
+library(RColorBrewer)
+
 FANTOM_20 <- readRDS("ROC_FONTOM20.RDS")
 colnames(FANTOM_20) <- c("Specificity", "Sensitivity")
 FANTOM_50 <- readRDS("ROC_FONTOM50.RDS")
@@ -48,7 +51,7 @@ tmp4 <- cbind(tmp2,tmp3)
 tmp4 <- tmp4[,c(-2,-4,-5)]
 colnames(tmp4) <- c("Database", "Specificity", "Sensitivity")
 
-ggplot(data = tmp4) +
+fig = ggplot(data = tmp4) +
   geom_line(data = default, aes(x=Specificity, y=Sensitivity), linetype = 2, show.legend = FALSE) +
   geom_line(aes(x=Specificity, y=Sensitivity, color = Database )) +
   labs(x="Specificity", y ="Sensitivity") +
@@ -58,5 +61,6 @@ ggplot(data = tmp4) +
   theme(text = element_text(size=20),
         legend.position = c(0.7, 0.2))
 
+display.brewer.all(colorblindFriendly = TRUE)
 
-
+fig + scale_colour_brewer(palette = "Dark2")

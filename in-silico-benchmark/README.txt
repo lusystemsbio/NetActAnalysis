@@ -8,7 +8,7 @@ combAna - folder for combined results included in the paper
              (3) plot of TF activity from each method across the models 
 regDBs/ - folder for regulons with and without perturbations  
 regDBsAUCell/ - folder for regulons modifed according to AUCell protocol
-sim.racipe/ - folder for racipe simulations
+sim.racipe/ - folder for racipe simulations (in-silico benchmark data set)
     sim.racipe.wt - racipe simulation without perturbation 
     sim.racipe.kd9 - racipe simulation with knockdown of TF9
     sim.racipe.comb.kd9 - combined racipe simulation:with 40 WT models and 43 knockdown models

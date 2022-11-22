@@ -167,7 +167,8 @@ plotData$hour <- (substr(plotData$name, nchar(plotData$name)-4,nchar(plotData$na
 plotData$hour[plotData$hour == "U"] <- 1
 plotData$batch <- factor(substr(plotData$name, nchar(plotData$name)-1,nchar(plotData$name)))
 
-
+cbbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+                                              
 p <- ggplot(plotData, aes(x=-PC2, y=PC1, shape = plotData$batch, color = plotData$type)) +
   geom_point(size=5) + 
   labs(x="PC2 (22.6%)", y="PC1 (37.9%)", col="Treatment", shape="Batch") +
@@ -192,7 +193,8 @@ ggplot(plot.me, aes(x=-PC2, y=PC1, shape = hour, color = type)) +
   theme_bw() + theme(#panel.border = element_blank(), 
     panel.grid.major = element_blank(),
     text = element_text(size=20),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))+
+  scale_colour_manual(values=cbbPalette)
 
 ggplot(plot.me, aes(x=-PC2, y=PC1, shape = hour, color = type)) +
   geom_point(size=5) + 
@@ -573,7 +575,7 @@ groupColors <- groupColors[c(7,5,1,3,6,2,4)]
 #groupColors <- as.list(groupColors)
 names(groupColors) <- plotData$type[1:7]
 
-H1 =  ComplexHeatmap::Heatmap(row_norm(new_activity), col = circlize::colorRamp2(c(-2, 0, 2), c("green3", "white", "red")),
+H1 =  ComplexHeatmap::Heatmap(row_norm(new_activity), col = circlize::colorRamp2(c(-2, 0, 2), c("blue3", "white", "red")),
                               cluster_columns = F, cluster_rows = T, show_row_dend = FALSE, name = "Activity", column_title = "Activity",
                               row_names_gp = grid::gpar(fontsize = 10), column_names_gp = grid::gpar(fontsize = 7), clustering_method_rows = "ward.D2",
                               clustering_distance_rows = function(x) as.dist((1-cor(t(x), method = "spear"))/2)) 
@@ -581,7 +583,7 @@ H1 =  ComplexHeatmap::Heatmap(row_norm(new_activity), col = circlize::colorRamp2
 #                              top_annotation = HeatmapAnnotation(data.frame(Treatment = substr(colnames(new_activity),1,(nchar(colnames(new_activity))-3))), col = list(Treatment = groupColors)))
 gs = rownames(new_activity)
 gc = colnames(new_activity)
-H2 = ComplexHeatmap::Heatmap(row_norm(data[gs, gc]), col = circlize::colorRamp2(c(-2, 0, 2), c("green3", "white", "red")),
+H2 = ComplexHeatmap::Heatmap(row_norm(data[gs, gc]), col = circlize::colorRamp2(c(-2, 0, 2), c("blue3", "white", "red")),
                              cluster_columns = F, cluster_rows = T, show_row_dend = FALSE,name = "Expression", column_title = "Expression",
                              row_names_gp = grid::gpar(fontsize = 10), column_names_gp = grid::gpar(fontsize = 7), clustering_method_rows = "ward.D2",
                              clustering_distance_rows = function(x) as.dist((1-cor(t(x), method = "spear"))/2))
@@ -798,6 +800,7 @@ plot.me.2$Treatment[plot.me.2$Treatment == "IFNg_IL4_2h" |plot.me.2$Treatment ==
 plot.me.2$Treatment <- as.factor(plot.me.2$Treatment)
 plot.me.2$Hour <- as.factor(plot.me.2$Hour)
 
+cbbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")                      
 ggplot(plot.me.2, aes(x=-PC2, y=PC1, col=Treatment, shape=Hour)) +
   geom_point(size=5) + 
   labs(y="PC1 (81.2%)", x="PC2 (11.8%)", col="Treatment", shape="Hour") +
@@ -805,9 +808,8 @@ ggplot(plot.me.2, aes(x=-PC2, y=PC1, col=Treatment, shape=Hour)) +
     panel.grid.major = element_blank(),
     text = element_text(size=20),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    legend.position="none"
-    
-  )
+    legend.position="none")+
+  scale_colour_manual(values=cbbPalette)
 
 
 
@@ -949,6 +951,7 @@ for(i in 1:nrow(dmat)){
 ggplot(as.data.frame(pca$x), aes(x = PC1, y = PC2, color = model.assignment)) + geom_point()
 summary(pca)
 
+cbbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 ggplot(as.data.frame(pca$x), aes(x = PC1, y = PC2, color = model.assignment)) +
   geom_point(size=5) + 
   labs(x="PC1 (36.6.6%)", y="PC2 (12.4%)", col="Treatment") +
@@ -957,7 +960,8 @@ ggplot(as.data.frame(pca$x), aes(x = PC1, y = PC2, color = model.assignment)) +
     text = element_text(size=20),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     legend.position="none"
-  )
+  )+
+  scale_colour_manual(values=cbbPalette)
 
 
 
@@ -1281,7 +1285,8 @@ ggplot(as.data.frame(pca$x), aes(x = PC1, y = PC2, color = model.assignment)) +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     legend.position="none") +
   geom_segment(aes(x = line.1.df[1,1], y = line.1.df[1,2], xend = line.1.df[nrow(line.1.df),1], yend = line.1.df[nrow(line.1.df),2] )) +
-  geom_segment(aes(x = line.2.df[1,1], y = line.2.df[1,2], xend = line.2.df[nrow(line.2.df),1], yend = line.2.df[nrow(line.2.df),2] ))
+  geom_segment(aes(x = line.2.df[1,1], y = line.2.df[1,2], xend = line.2.df[nrow(line.2.df),1], yend = line.2.df[nrow(line.2.df),2] )) +
+  scale_colour_manual(values=cbbPalette)
  
 find.y <- function(m, x, b){
   return((m*x) +b)
@@ -1316,7 +1321,8 @@ ggplot(as.data.frame(pca$x), aes(x = PC1, y = PC2, color = loc$V1)) +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     legend.position="none") +
   geom_segment(aes(x = line.1.df[1,1], y = line.1.df[1,2], xend = line.1.df[nrow(line.1.df),1], yend = line.1.df[nrow(line.1.df),2] )) +
-  geom_segment(aes(x = line.2.df[1,1], y = line.2.df[1,2], xend = line.2.df[nrow(line.2.df),1], yend = line.2.df[nrow(line.2.df),2] ))
+  geom_segment(aes(x = line.2.df[1,1], y = line.2.df[1,2], xend = line.2.df[nrow(line.2.df),1], yend = line.2.df[nrow(line.2.df),2] ))+
+  scale_colour_manual(values=cbbPalette)
 
 
 loc.index <- which(loc[,1] =="mid" )
@@ -1330,7 +1336,8 @@ ggplot(as.data.frame(pca$x[loc.index,]), aes(x = PC1, y = PC2, color = model.ass
     panel.grid.major = element_blank(),
     text = element_text(size=20),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    legend.position="none")
+    legend.position="none")+
+  scale_colour_manual(values=cbbPalette)
 
 ##### make a linear model of subsetted data
 
@@ -1340,7 +1347,8 @@ ggplot(as.data.frame(pca$x[loc.index,]), aes(x = PC1, y = PC2, color = model.ass
 ggplot(as.data.frame(pca$x[loc.index,]), aes(x = PC1, y = PC2)) +
   geom_point() +
   geom_abline(intercept = -5.5, slope = 2, col = "red") +
-  theme_classic()
+  theme_classic()+
+  scale_colour_manual(values=cbbPalette)
 
 
 ####### project points to regression line
@@ -1377,7 +1385,8 @@ ggplot(projected, aes(x = X, y = Y, color = model.assignment[loc.index])) +
   theme_classic() +
   theme(legend.position = "none", 
         axis.text = element_text(size = 20),
-        axis.title = element_text(size = 20))
+        axis.title = element_text(size = 20))+
+  scale_colour_manual(values=cbbPalette)
 
 projected.IFNg <- projected[projected$Assignment == "IFNg",]
 projected.IL4 <- projected[projected$Assignment == "IL4",]
@@ -1395,7 +1404,11 @@ projected.all <- rbind(projected.IFNg,projected.IL4,projected.IFNg_IL4 )
 ggplot(projected.all, aes(x=X, fill=Assignment)) +
   geom_histogram( color='#e9ecef', alpha=0.6, position='identity', bins = 15) +
   theme_classic() +
-  theme(legend.position = "none")
+  theme(legend.position = "none", 
+        axis.text = element_text(size = 20),
+        axis.title = element_text(size = 20))  +
+  scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73", "#F0E442"))+
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73", "#F0E442"))
 
 ggplot(projected.all, aes(x=X, fill=Assignment)) +
   geom_density( color='#e9ecef', alpha=0.6, position='identity') +

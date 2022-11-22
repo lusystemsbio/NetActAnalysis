@@ -475,7 +475,7 @@ ggplot(tmp.3, aes(x = TF,y =Score, fill = State)) +
   scale_fill_manual(values = c("#FFCC66", "#4DB3E6")) +
   ylab("Model Porportion") +
   xlab("TF KD") +
-  theme_classic()
+  theme_classic() 
 
 
 
@@ -553,7 +553,7 @@ ggplot(plot.me, aes(x = smad3, y = pc1)) + geom_hex(bins = 75) + scale_fill_viri
   
 ##########################################
 
-sracipePlotData(emt.rset, plotToFile = T)
+sracipePlotData(emt.rset, plotToFile = T, col = grDevices::colorRampPalette(rev(RColorBrewer::brewer.pal(11, 'RdYlBu')))
 
 tmp <- t(log2(assay(emt.rset)))
 pca <- prcomp(tmp, center = T, scale = T)

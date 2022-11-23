@@ -4,7 +4,7 @@ benchmark
  tfActivity/ - benchmark results for TF activity inference 
  linkInference/ - benchmark results for regulatory link inference 
 
-The following folders has the data and simulation of different methods used in the benchmark.
+The following folders have the data and simulation of different methods used in the benchmark.
 regDBs/ - folder for regulons with and without perturbations  
 regDBsAUCell/ - folder for regulons modifed according to AUCell protocol
 regNet/ - topology of the synthetic regulatory network and its visualization 

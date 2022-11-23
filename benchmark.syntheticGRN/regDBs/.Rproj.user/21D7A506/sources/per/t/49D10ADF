@@ -1,0 +1,26 @@
+{
+    "id": "49D10ADF",
+    "path": "~/research/netact/benchmark/regDBs/lib.regDBs.R",
+    "project_path": "lib.regDBs.R",
+    "type": "r_source",
+    "hash": "196104456",
+    "contents": "",
+    "dirty": false,
+    "created": 1633625916964.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "15,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1631565178,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1631565178,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,26 @@
+{
+    "id": "52A4F6D8",
+    "path": "~/research/netact/benchmark/combAna/link.inference/netact.newlinks.R",
+    "project_path": "netact.newlinks.R",
+    "type": "r_source",
+    "hash": "114171856",
+    "contents": "",
+    "dirty": false,
+    "created": 1661536194647.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "81,0",
+        "scrollLine": "77"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1661614009,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1661614009793,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,26 @@
+{
+    "id": "9941677A",
+    "path": "~/research/netact/benchmark/combAna/linkInference/regNet.wt/netactVSgenie3/netactVSgenie3.R",
+    "project_path": "netactVSgenie3.R",
+    "type": "r_source",
+    "hash": "2222027307",
+    "contents": "",
+    "dirty": false,
+    "created": 1661796077433.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "102,0",
+        "scrollLine": "83"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1661809345,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1661809345,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,40 @@
+
+# Create regdb with no perturbation for AUCell
+# (1) do not include targets with inhibitory tf-target relation 
+# (2) include tf to its regulon
+#--------------------------------------------------------------------------------------#
+rm(list=ls())
+tfnet_df <- read.csv(file='../sim.racipe/net30tf.csv', header=TRUE)
+
+create_regdb_for_AUCell <- function(tfnet){
+   #tfnet <- tfnet_df
+   reg_db <- list()
+   TYPE_ACT <- 1
+   TYPE_INH <- 2
+   TYPE_SIG <- 5
+   
+   for(i in seq(1:dim(tfnet)[1])){
+      source <- as.character(tfnet[i,"SOURCE"])
+      target <- as.character(tfnet[i,"TARGET"])
+      type <- as.character(tfnet[i,"TYPE"])
+      
+      # if (type == TYPE_SIG) # don't include signaling interactions
+      #    next
+      if (type == TYPE_SIG || type == TYPE_INH) # don't include signaling or inhibitory interactions
+         next
+      if(!length(reg_db[[source]])) { # first target found
+         #reg_db[[source]] <- target
+         reg_db[[source]] <- c(source, target)
+      } else # second or subsequent target found
+         reg_db[[source]] <- c(reg_db[[source]], target)
+      #break()
+   }
+   return(reg_db)
+}
+
+regdb <- create_regdb_for_AUCell(tfnet_df)
+
+saveRDS(regdb, file = 'regDB.nopert.rds')
+
+targets <- unique(unlist(regdb))
+length(targets)

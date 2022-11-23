@@ -1,0 +1,26 @@
+{
+    "id": "68E10A8E",
+    "path": "~/research/netact/benchmark/regDBs/comb.regDBs.R",
+    "project_path": "comb.regDBs.R",
+    "type": "r_source",
+    "hash": "2915216973",
+    "contents": "",
+    "dirty": false,
+    "created": 1633625890942.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "13,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1631565177,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1631565177,
+    "read_only": false,
+    "read_only_alternatives": []
+}

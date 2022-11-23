@@ -1,0 +1,126 @@
+rm(list = ls())
+
+regdb <- readRDS(file = '/Users/a.katebi/research/netact/benchmark/regDBs/regDB.nopert.rds')
+targets <- unique(unlist(regdb))
+tfs <- names(regdb)
+length(targets)
+
+act.racipe.df <- read.table(file = '/Users/a.katebi/research/netact/benchmark/sim.racipe/net30tf.states.txt', header = TRUE)
+# act.racipe.df <- act.racipe.df[, tfs]
+rownames(act.racipe.df) <- paste('M', act.racipe.df$MODEL_NO, sep = '')
+act.racipe.df$MODEL_NO <- NULL; act.racipe.df$NO_STATES <- NULL; act.racipe.df$STATE_NO <- NULL
+act.racipe.df <- t(act.racipe.df)
+
+act.netact.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.netact/regNet.wt/net30tf.dis.00/acts/act.regDB.0.csv', header = TRUE, row.names = 1)
+act.netact.df <- as.matrix(act.netact.df)
+
+act.nca.df <- read.csv(file = '/Users/a.katebi/research/netact/sim.nca/tfnetwork.random/phase.07/net30tf.dis/sim.nca.nopert/nca.act/nca.act.csv', header = TRUE, row.names = 1)
+act.nca.df <- t(act.nca.df)
+act.nca.df <- as.matrix(act.nca.df)
+
+act.viper.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.viper/regNet.wt/net30tf.dis.00/acts/act.regDB.0.csv', header = TRUE, row.names = 1)
+act.viper.df <- as.matrix(act.viper.df)
+
+act.aucell100.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.aucell/regNet.wt/net30tf.dis.00/acts/act.regDB.0-100.csv', header = TRUE, row.names = 1)
+act.aucell200.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.aucell/regNet.wt/net30tf.dis.00/acts/act.regDB.0-200.csv', header = TRUE, row.names = 1)
+act.aucell300.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.aucell/regNet.wt/net30tf.dis.00/acts/act.regDB.0-300.csv', header = TRUE, row.names = 1)
+act.aucell400.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.aucell/regNet.wt/net30tf.dis.00/acts/act.regDB.0-400.csv', header = TRUE, row.names = 1)
+act.aucell100.df <- as.matrix(act.aucell100.df)
+act.aucell200.df <- as.matrix(act.aucell200.df)
+act.aucell300.df <- as.matrix(act.aucell300.df)
+act.aucell400.df <- as.matrix(act.aucell400.df)
+
+YLIMIT <- c(min(min(act.racipe.df), 
+               min(act.netact.df), 
+               min(act.viper.df), 
+               min(act.netact.df), 
+               min(act.aucell400.df)), 
+           max(max(act.racipe.df), 
+               max(act.netact.df), 
+               max(act.viper.df), 
+               max(act.netact.df), 
+               max(act.aucell400.df))) 
+
+
+
+XLIMIT <- c(1, 83)
+PCH_VAL <- 20
+colorv <- c('red', 'blue', 'cyan', 'orange')
+legend_names <- c('RACIPE', 'Netact', 'VIPER', 'AUCell')
+
+figdir <- './'
+WIDTH <- 6
+HEIGHT <- 3
+figname <- paste(figdir, 'Acts-byMethod-', WIDTH, 'x', HEIGHT,'.pdf', sep = '') 
+pdf(file = figname, width=WIDTH , height=HEIGHT, paper='special', onefile = TRUE)
+
+
+par(mfrow=c(1,1))
+par(mar=c(3.5, 3.5, 1.5, 1.0))  # bottom, left, top, right
+par(mgp=c(1.5, 0.4, 0))
+par(oma=c(1,1,1,1)) # all sides have 3 lines of space
+
+for(tf in tfs[1:9]){
+  #tf <- tfs[1]
+  #tf <- tfs[3]
+  #tf <- tfs[4]
+  #tf <- tfs[9]
+  print(tf)  
+  plot(1:length(XLIMIT), xlim=XLIMIT, 
+       ylim=YLIMIT, main = tf,
+       pch='', #xaxt='n', 
+       #lwd=0.01,
+       cex=0.01,
+       xlab = 'Model No', ylab = 'Activity')
+  points(act.racipe.df[tf,], col=colorv[1], pch = PCH_VAL)
+  lines(act.racipe.df[tf,], col=colorv[1], lty=3)
+  
+  points(act.netact.df[tf,], col=colorv[2], pch = PCH_VAL)
+  lines(act.netact.df[tf,], col=colorv[2], lty=3)
+  
+  points(act.viper.df[tf,], col=colorv[3], pch = PCH_VAL)
+  lines(act.viper.df[tf,], col=colorv[3], lty=3)
+  
+  points(act.aucell400.df[tf,]*10, col=colorv[4], pch = PCH_VAL)
+  lines(act.aucell400.df[tf,]*10, col=colorv[4], lty=3)
+  #break()
+}
+
+#legend(1.2, -3.2, legend = legend_names, col=colorv, lty=3, pch = PCH_VAL)
+legend(1.2, -4.5, legend = legend_names, col=colorv, lty=3, pch = PCH_VAL, 
+       horiz = TRUE, bty = 'n')
+
+dev.off()
+
+
+
+
+# scatter plot for TF activities between methods
+WIDTH <- 4
+HEIGHT <- 4
+figname <- paste(figdir, 'Acts-RACIPE-vs-otherMethods-', WIDTH, 'x', HEIGHT,'.pdf', sep = '') 
+pdf(file = figname, width=WIDTH , height=HEIGHT, paper='special', onefile = TRUE)
+par(mfrow=c(3,1))
+par(mar=c(0.1, 4.0, 1.5, 1.5))  # bottom, left, top, right
+par(mgp=c(1.5, 0.4, 0))
+par(oma=c(4,1,1,1)) # all sides have 3 lines of space
+for(tf in tfs[1:9]){ 
+  print(tf)
+  plot(act.racipe.df[tf,], act.netact.df[tf,], xlab = '', ylab = 'Netact', xaxt='n')
+  title(main = tf)
+  plot(act.racipe.df[tf,], act.viper.df[tf,], xlab = '', ylab = 'VIPER', xaxt='n')
+  plot(act.racipe.df[tf,], act.aucell400.df[tf,], xlab = 'RACIPE', ylab = 'AUCell')
+  #title(xlab = 'RACIPE',main = 'RACIPE vs other methods')
+}
+dev.off()
+
+
+for(tf in tfs[1:9]){ 
+  cor(act.racipe.df[tf,], act.netact.df[tf,], method = 'spearman')
+  cor(act.racipe.df[tf,], act.viper.df[tf,], method = 'spearman')
+  cor(act.racipe.df[tf,], act.aucell400.df[tf,], method = 'spearman')
+}
+
+
+
+

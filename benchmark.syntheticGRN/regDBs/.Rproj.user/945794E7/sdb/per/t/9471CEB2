@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\nrm(list=ls())\nsetwd(getwd())\n\n\nNO.PERT <- 100 \n\nsource('./lib.regDBs.R')\n\n# Combine regdbs with 5 perturbations\n#-----------------------------------\ndir.regdb <- '../regdb.5/' \nregdb.5.list <- combine.regdbs(dir.regdb, NO.PERT)\n\n# Combine regdbs with 10 perturbations\n#-----------------------------------\ndir.regdb <- '../regdb.10/' \nregdb.10.list <- combine.regdbs(dir.regdb, NO.PERT)\n\n\n# Combine regdbs with 15 perturbations\n#-----------------------------------\ndir.regdb <- '../regdb.15/' \nregdb.15.list <- combine.regdbs(dir.regdb, NO.PERT)\n\n\n# Save regdb list \n#---------------- \nfname.regdb.comb <- './regDBs.5.rds'\nsaveRDS(regdb.5.list, file = fname.regdb.comb)\n\n\nfname.regdb.comb <- './regDBs.10.rds'\nsaveRDS(regdb.10.list, file = fname.regdb.comb)\n\n\nfname.regdb.comb <- './regDBs.15.rds'\nsaveRDS(regdb.15.list, file = fname.regdb.comb)\n\n\n# Load and save regdb with no perturbations\n#=========================================\ndir.regdb <- '../regdb.no/' \nfname.regdb <- paste(dir.regdb, 'regdb', '.rda', sep = '')\nfname.regdb\nload(fname.regdb)\nregdb.no <- regdb\n\nfname.regdb.nopert <- './regDB.nopert.rds'\nsaveRDS(regdb.no ,file = fname.regdb.nopert)\n\n",
+    "created" : 1550759525904.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2915216973",
+    "id" : "9471CEB2",
+    "lastKnownWriteTime" : 1550759958,
+    "last_content_update" : 1550759958840,
+    "path" : "~/research/netact/nca.sim/tfnetwork.random/phase.05/net30tf.dis/regDBs/comb.regdbs.R",
+    "project_path" : "comb.regdbs.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

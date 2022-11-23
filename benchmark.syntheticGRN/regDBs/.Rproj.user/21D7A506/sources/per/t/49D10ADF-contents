@@ -1,0 +1,15 @@
+
+
+# Combine regulon DBs
+combine.regdbs <- function(dir.regdb, NO.PERT){
+   regdb.list <- list()
+   for(regdb.no in 1:100){
+      print(regdb.no)
+      fname.regdb <- paste(dir.regdb, 'regdb.', toString(regdb.no), '.rda', sep = '') 
+      print(fname.regdb)
+      load(fname.regdb)
+      regdb.list[[paste('regdb.', toString(regdb.no), sep = '')]] <- regdb
+   }  
+   return(regdb.list)
+}
+

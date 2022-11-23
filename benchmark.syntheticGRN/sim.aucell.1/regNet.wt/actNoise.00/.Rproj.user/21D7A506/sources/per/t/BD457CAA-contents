@@ -1,0 +1,78 @@
+
+"Calculate activities using unperturbed modified regulon DB"
+# regulon DB modified for AUCell
+# (1) add tf to its regulon
+# (2) don't include targets with inhibitory interactions to the regulon
+
+
+rm(list = ls())
+library(AUCell)
+
+calAUcellact <- function(exp_df, regdb){
+  cells_rankings <- AUCell_buildRankings(exp_df, plotStats = F)
+  class(cells_rankings)
+  length(cells_rankings)
+  rankings <- getRanking(cells_rankings) 
+  
+  aucMaxRank <- ceiling(nrow(rankings)*5/100) # 5%
+  aucMaxRank
+  cells_AUC <- AUCell_calcAUC(regdb, cells_rankings, aucMaxRank=aucMaxRank, nCores=1) 
+  act <- getAUC(cells_AUC)
+  return(act)
+}
+
+# Using regulon DBs with NO perturbed targets
+#------------------------------------------- 
+# Regulon DB
+regdb <- readRDS(file = '/Users/a.katebi/research/netact/benchmark/regDBs/regDB.nopert.aucell.rds')
+
+targets <- unique(unlist(regdb))
+tfs <- names(regdb)
+length(targets)
+
+
+# Load racipe activities
+act.racipe.df <- read.table(file = '/Users/a.katebi/research/netact/benchmark/sim.racipe/net30tf.states.txt', header = TRUE)
+rownames(act.racipe.df) <- paste('M', act.racipe.df$MODEL_NO, sep = '')
+act.racipe <- t(act.racipe.df[, tfs]) # retain acts for TFs only
+dim(act.racipe)
+
+
+# RACIPE expressions - Noise level 0
+exp.racipe.df <- read.table(file = '/Users/a.katebi/research/netact/benchmark/sim.racipe/net30tf.states.exp.txt', header=TRUE)
+row.names(exp.racipe.df) <- c(paste0('M', exp.racipe.df$MODEL_NO)) # assign row names
+exp_df <- t(exp.racipe.df[,targets]) # retain target expressions
+dim(exp_df)
+
+
+act.aucell <- calAUcellact(exp_df, regdb)
+cor.avg <- mean(abs(diag(cor(t(act.racipe), t(act.aucell), method = 'spearman')))) 
+cor.avg 
+
+
+# RACIPE expressions - Noise level 0.4
+exp.racipe.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.racipe/net30tf.states.exp_noise-level-0.4.csv', header=TRUE, row.names = 1)
+exp_df <- as.matrix(exp.racipe.df)
+
+act.aucell <- calAUcellact(exp_df, regdb)
+cor.avg <- mean(abs(diag(cor(t(act.racipe), t(act.aucell), method = 'spearman')))) 
+cor.avg 
+
+
+# RACIPE expressions - Noise level 0.7
+exp.racipe.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.racipe/net30tf.states.exp_noise-level-0.7.csv', header=TRUE, row.names = 1)
+exp_df <- as.matrix(exp.racipe.df)
+
+act.aucell <- calAUcellact(exp_df, regdb)
+cor.avg <- mean(abs(diag(cor(t(act.racipe), t(act.aucell), method = 'spearman')))) 
+cor.avg 
+
+
+# RACIPE expressions - Noise level 0.7
+exp.racipe.df <- read.csv(file = '/Users/a.katebi/research/netact/benchmark/sim.racipe/net30tf.states.exp_noise-level-1.csv', header=TRUE, row.names = 1)
+exp_df <- as.matrix(exp.racipe.df)
+
+act.aucell <- calAUcellact(exp_df, regdb)
+cor.avg <- mean(abs(diag(cor(t(act.racipe), t(act.aucell), method = 'spearman')))) 
+cor.avg 
+

@@ -1,0 +1,26 @@
+{
+    "id": "C5351B89",
+    "path": "~/research/netact/benchmark/combAna/link.inference/netactVSselMethods.R",
+    "project_path": "netactVSselMethods.R",
+    "type": "r_source",
+    "hash": "1716526354",
+    "contents": "",
+    "dirty": false,
+    "created": 1661541317937.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "9,48",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1661554172,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1661554172252,
+    "read_only": false,
+    "read_only_alternatives": []
+}

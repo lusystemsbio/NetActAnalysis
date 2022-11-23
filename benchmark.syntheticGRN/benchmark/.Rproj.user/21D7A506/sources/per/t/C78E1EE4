@@ -1,0 +1,27 @@
+{
+    "id": "C78E1EE4",
+    "path": "~/research/netact/benchmark/combAna/plotAct.R",
+    "project_path": "plotAct.R",
+    "type": "r_source",
+    "hash": "2991668394",
+    "contents": "",
+    "dirty": false,
+    "created": 1632860669686.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "53,40",
+        "scrollLine": "48"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1632929422,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1632929422061,
+    "read_only": false,
+    "read_only_alternatives": []
+}

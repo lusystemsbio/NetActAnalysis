@@ -1,0 +1,8 @@
+rm(list=ls())
+
+regdb.all.pert <- list() 
+regdb.all.pert[["regdb.5"]] <- readRDS(file = './regDBs.5.rds') 
+regdb.all.pert[["regdb.10"]] <- readRDS(file = './regDBs.10.rds') 
+regdb.all.pert[["regdb.15"]] <- readRDS(file = './regDBs.15.rds') 
+
+saveRDS(regdb.all.pert, file = './regdb.all.pert.rds')

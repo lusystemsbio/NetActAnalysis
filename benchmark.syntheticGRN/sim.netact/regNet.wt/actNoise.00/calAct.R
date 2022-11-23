@@ -1,0 +1,77 @@
+
+"Calculateactivities using perturbed regulon DBs" 
+rm(list = ls())
+library(NetAct)
+
+outdir <- "./act/" 
+dir.create(outdir) 
+
+act.all  <- list() 
+
+
+# Load racipe expressions
+exp_df <- read.table(file = '../../../sim.racipe/sim.racipe.wt/net30tf.states.exp.txt', header=TRUE)
+row.names(exp_df) <- c(paste0('M', exp_df$MODEL_NO)) # create and assign row names
+exp_df$NO_STATES <- NULL; exp_df$STATE_NO <- NULL ; exp_df$MODEL_NO <- NULL # delete meta columns
+exp_df <- t(exp_df) # put genes in rows, models in columns
+
+
+# create DEresult object 
+#-----------------------
+# Create a DE result list object containing a table with on column named 'padj'
+DEresult <- list()
+myTable <- as.data.frame(matrix(nrow = nrow(exp_df), ncol = 1), col.names=c('padj'))
+colnames(myTable) <- c('padj') 
+rownames(myTable) <- rownames(exp_df)
+myTable$padj <- 1 
+DEresult$table <- myTable
+
+# Calculate Act using unperturbed regulon DB 
+#============================================
+regdb <- readRDS(file = '../../../regDBs/regDB.nopert.rds')
+tfs <- names(regdb)
+targets <- unique(unlist(regdb))
+length(targets)
+
+acts = TF_Activity(names(regdb), regdb, exp_df, DEresult, with_weight = FALSE)
+acts = acts$all_activities 
+
+write.csv(acts, file=paste0(outdir, 'act.regdb.0.csv'), quote = FALSE) 
+
+#quit()
+
+# Calculate Activities for perturbed reg DBs
+#===========================================
+regdb.list <- readRDS(file = '../../../regDBs/regDBs.5.rds')
+actByRegDB <- lapply(names(regdb.list), function(regdb.id) {
+  acts = TF_Activity(names(regdb.list[[regdb.id]]), regdb.list[[regdb.id]], exp_df, DEresult, with_weight = FALSE)
+  return(acts$all_activities)
+ }
+)
+names(actByRegDB) <- names(regdb.list) 
+
+saveRDS(actByRegDB , file = paste(outdir, 'act.regdb.5.rds', sep = ''))
+act.all[['regdb.5']] <- actByRegDB 
+
+
+regdb.list <- readRDS(file = '../../../regDBs/regDBs.10.rds')
+actByRegDB <- lapply(names(regdb.list), function(regdb.id) {
+  acts = TF_Activity(names(regdb.list[[regdb.id]]), regdb.list[[regdb.id]], exp_df, DEresult, with_weight = FALSE)
+  return(acts$all_activities)
+}
+) 
+names(actByRegDB) <- names(regdb.list)
+saveRDS(actByRegDB , file = paste(outdir, 'act.regdb.10.rds', sep = ''))
+act.all[['regdb.10']] <- actByRegDB 
+
+regdb.list <- readRDS(file = '../../../regDBs/regDBs.15.rds')
+actByRegDB <- lapply(names(regdb.list), function(regdb.id) {
+  acts = TF_Activity(names(regdb.list[[regdb.id]]), regdb.list[[regdb.id]], exp_df, DEresult, with_weight = FALSE)
+  return(acts$all_activities)
+}
+) 
+names(actByRegDB) <- names(regdb.list)
+saveRDS(actByRegDB , file = paste(outdir, 'act.regdb.15.rds', sep = ''))
+act.all[['regdb.15']] <- actByRegDB 
+
+saveRDS(act.all, file = paste(outdir, 'act.all.rds', sep = '')) 

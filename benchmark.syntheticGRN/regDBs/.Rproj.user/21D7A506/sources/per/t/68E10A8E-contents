@@ -1,0 +1,51 @@
+
+rm(list=ls())
+setwd(getwd())
+
+
+NO.PERT <- 100 
+
+source('./lib.regDBs.R')
+
+# Combine regdbs with 5 perturbations
+#-----------------------------------
+dir.regdb <- '../regdb.5/' 
+regdb.5.list <- combine.regdbs(dir.regdb, NO.PERT)
+
+# Combine regdbs with 10 perturbations
+#-----------------------------------
+dir.regdb <- '../regdb.10/' 
+regdb.10.list <- combine.regdbs(dir.regdb, NO.PERT)
+
+
+# Combine regdbs with 15 perturbations
+#-----------------------------------
+dir.regdb <- '../regdb.15/' 
+regdb.15.list <- combine.regdbs(dir.regdb, NO.PERT)
+
+
+# Save regdb list 
+#---------------- 
+fname.regdb.comb <- './regDBs.5.rds'
+saveRDS(regdb.5.list, file = fname.regdb.comb)
+
+
+fname.regdb.comb <- './regDBs.10.rds'
+saveRDS(regdb.10.list, file = fname.regdb.comb)
+
+
+fname.regdb.comb <- './regDBs.15.rds'
+saveRDS(regdb.15.list, file = fname.regdb.comb)
+
+
+# Load and save regdb with no perturbations
+#=========================================
+dir.regdb <- '../regdb.no/' 
+fname.regdb <- paste(dir.regdb, 'regdb', '.rda', sep = '')
+fname.regdb
+load(fname.regdb)
+regdb.no <- regdb
+
+fname.regdb.nopert <- './regDB.nopert.rds'
+saveRDS(regdb.no ,file = fname.regdb.nopert)
+

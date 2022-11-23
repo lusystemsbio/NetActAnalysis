@@ -1,0 +1,26 @@
+{
+    "id": "23AD1915",
+    "path": "~/research/netact/benchmark/sim.netact/regNet.wt/net30tf.dis.00/calAct.R",
+    "project_path": "calAct.R",
+    "type": "r_source",
+    "hash": "4237861897",
+    "contents": "",
+    "dirty": false,
+    "created": 1633459153690.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "76,64",
+        "scrollLine": "53"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1633467861,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1633467861381,
+    "read_only": false,
+    "read_only_alternatives": []
+}

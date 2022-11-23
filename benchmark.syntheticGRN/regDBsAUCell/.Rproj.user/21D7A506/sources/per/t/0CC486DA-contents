@@ -1,0 +1,45 @@
+
+# Infer perturbed regulon DBs for AUCell from the original perturbed regulon DBs
+
+rm(list=ls())
+
+create_perturbed_regDBset <- function(regDB, regdb.pos, regdb.neg){
+  create_perturbed_regdb_for_AUCell <- function(regdb, regdb.pos, regdb.neg) { 
+    regdb.new <- lapply(names(regdb), function(tf) {
+      # other targets: went into the perturbed regulon because of the perturbation effect
+      targetsOth <- setdiff(regdb[[tf]], union(regdb.pos[[tf]], regdb.neg[[tf]])) 
+      union(intersect(regdb[[tf]], regdb.pos[[tf]]), # positive targets
+            sample(targetsOth, ceiling(length(targetsOth)/2))) # random half of the other targets 
+    }
+    ) 
+    names(regdb.new) <- names(regdb)
+    return(regdb.new)
+  }  
+  regDB.new <- lapply(names(regDB), function(regdb.id)
+    create_perturbed_regdb_for_AUCell(regDB[[regdb.id]], regdb.pos, regdb.neg)
+  )
+  names(regDB.new) <- names(regDB)
+  return(regDB.new)
+}
+
+regDB.5 <- readRDS(file = '../regDBs/regDBs.5.rds') 
+regDB.10 <- readRDS(file = '../regDBs/regDBs.10.rds') 
+regDB.15 <- readRDS(file = '../regDBs/regDBs.15.rds') 
+regdb.pos <- readRDS(file = './regdb.pos.rds')
+regdb.neg <- readRDS(file = './regdb.neg.rds')
+
+regdb.all.pert <- list() 
+set.seed(100)
+regDB.new <- create_perturbed_regDBset(regDB=regDB.5, regdb.pos, regdb.neg)
+saveRDS(regDB.new, file = './regDBs.5.rds')
+regdb.all.pert[["regdb.5"]] <- regDB.new 
+
+regDB.new <- create_perturbed_regDBset(regDB=regDB.10, regdb.pos, regdb.neg)
+saveRDS(regDB.new, file = './regDBs.10.rds')
+regdb.all.pert[["regdb.10"]] <- regDB.new 
+
+regDB.new <- create_perturbed_regDBset(regDB=regDB.15, regdb.pos, regdb.neg)
+saveRDS(regDB.new, file = './regDBs.15.rds')
+regdb.all.pert[["regdb.15"]] <- regDB.new 
+
+saveRDS(regdb.all.pert, file = './regdb.all.pert.rds')

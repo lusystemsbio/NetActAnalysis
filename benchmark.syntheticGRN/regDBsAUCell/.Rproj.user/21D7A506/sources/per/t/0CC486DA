@@ -1,0 +1,26 @@
+{
+    "id": "0CC486DA",
+    "path": "~/research/netact/benchmark/regDBsAUCell/infer.regDBs_pert.R",
+    "project_path": "infer.regDBs_pert.R",
+    "type": "r_source",
+    "hash": "2265842383",
+    "contents": "",
+    "dirty": false,
+    "created": 1633625594176.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "33,8",
+        "scrollLine": "27"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1633625765,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1633625765423,
+    "read_only": false,
+    "read_only_alternatives": []
+}

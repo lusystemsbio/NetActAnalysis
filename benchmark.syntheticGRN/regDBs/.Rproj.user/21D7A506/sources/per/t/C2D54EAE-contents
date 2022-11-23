@@ -1,0 +1,67 @@
+
+rm(list=ls())
+setwd(getwd())
+
+getRegSizes <- function(regdb){
+   #regSizes <- sapply(names(regdb), function(tf) length(regdb[[tf]])) 
+   return(sapply(names(regdb), function(tf) length(regdb[[tf]])) )
+}
+
+# Calculate target sizes for regDBs with NO perturbations
+#-------------------------------------------------------
+fname.regdb <- './regDB.nopert.rds' 
+regDB.nopert <- readRDS(file = fname.regdb)
+target.size.nopert <- length(unique(unlist(regDB.nopert)))
+print(target.size.nopert)
+
+regSizes.nopert <- getRegSizes(regdb = regDB.nopert)
+hist(regSizes.nopert)
+
+
+# regDBs with 5 perturbations
+#----------------------------- 
+regDBs <- readRDS(file =  './regDBs.5.rds' )
+
+regSizes.regDB <- lapply(names(regDBs), function(regdb.id) getRegSizes(regdb = regDBs[[regdb.id]]) )
+regSizes.regDB5 <- unlist(regSizes.regDB)
+hist(regSizes.regDB5)
+
+
+# regDBs with 10 perturbations
+#----------------------------- 
+regDBs <- readRDS(file =  './regDBs.10.rds' )
+regSizes.regDB <- lapply(names(regDBs), function(regdb.id) getRegSizes(regdb = regDBs[[regdb.id]]) )
+regSizes.regDB10 <- unlist(regSizes.regDB)
+hist(regSizes.regDB10)
+
+
+# regDBs with 15 perturbations
+#----------------------------- 
+regDBs <- readRDS(file =  './regDBs.15.rds' )
+regSizes.regDB <- lapply(names(regDBs), function(regdb.id) getRegSizes(regdb = regDBs[[regdb.id]]) )
+regSizes.regDB15 <- unlist(regSizes.regDB)
+hist(regSizes.regDB15)
+
+length(regSizes.regDB15)
+
+
+# Plot regulon DB target size distribution
+#-----------------------------------------
+XLIMIT <- c(19, 23) 
+YLIMIT <- c(0, 1250) 
+
+figdir <- './figs/'
+dir.create(figdir)
+figname <- paste(figdir, 'hist.regulon.sizes.pdf', sep='') 
+pdf(file = figname, width=6, height=6, paper='special', onefile = TRUE)
+par(mfrow=c(3,1))
+
+hist(as.numeric(regSizes.regDB5), xlim = XLIMIT, ylim = YLIMIT, main = 'regDB5', xlab = "")
+abline(v=mean(regSizes.regDB5), col='red', lwd=2)
+
+hist(as.numeric(regSizes.regDB10), xlim = XLIMIT, ylim = YLIMIT, main = 'regDB10', xlab = "")
+abline(v=mean(regSizes.regDB10), col='red', lwd=2)
+
+hist(as.numeric(regSizes.regDB15), xlim = XLIMIT, ylim = YLIMIT, main = 'regDB15', xlab = "")
+abline(v=mean(regSizes.regDB15), col='red', lwd=2)
+dev.off() 

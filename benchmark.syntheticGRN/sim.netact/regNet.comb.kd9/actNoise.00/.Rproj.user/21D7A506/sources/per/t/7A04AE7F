@@ -1,0 +1,26 @@
+{
+    "id": "7A04AE7F",
+    "path": "~/research/netact/benchmark/sim.netact/regNet.wt/net30tf.dis.00/plotAvgCor.R",
+    "project_path": "plotAvgCor.R",
+    "type": "r_source",
+    "hash": "910818765",
+    "contents": "",
+    "dirty": false,
+    "created": 1633462398636.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "13,0",
+        "scrollLine": "2"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1633462272,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1633462272,
+    "read_only": false,
+    "read_only_alternatives": []
+}

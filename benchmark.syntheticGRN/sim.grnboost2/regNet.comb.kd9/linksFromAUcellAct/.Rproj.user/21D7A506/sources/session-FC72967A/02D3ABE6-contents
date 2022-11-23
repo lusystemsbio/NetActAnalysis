@@ -1,0 +1,18 @@
+
+rm(list = ls())
+
+outdir <- "./data/" 
+dir.create(outdir) 
+
+# Load racipe expressions
+mydata <- read.csv(file = '../../sim.aucell.1/regNet.wt/actNoise.00/act/act.regdb.0.csv', header=TRUE, row.names = 1)
+mydata <- t(mydata)
+
+write.table(mydata, file = paste(outdir, 'net30tf.states.tsv', sep = ''), row.names=FALSE, sep="\t", quote = F)
+
+# load regulon DB 
+regdb <- readRDS('../../regDBs/regDB.nopert.rds')
+names(regdb)
+
+write.table(names(regdb), file = paste(outdir, 'transcription_factors.tsv', sep = ''), 
+            row.names=FALSE, sep="\t", quote = F, col.names = F)

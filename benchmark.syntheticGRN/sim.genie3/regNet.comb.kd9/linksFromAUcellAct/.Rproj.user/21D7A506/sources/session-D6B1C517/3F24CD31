@@ -1,0 +1,26 @@
+{
+    "id": "3F24CD31",
+    "path": "~/research/netact/benchmark/sim.genie3/regdb.15/linksFromAUcellAct/canvas.R",
+    "project_path": "canvas.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1660764718874.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "17,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1660764689,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1660764689,
+    "read_only": false,
+    "read_only_alternatives": []
+}

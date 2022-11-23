@@ -1,0 +1,16 @@
+validating args Namespace(dry_run=False, genie3=False, grnboost2=True, i='./data/net30tf.states.tsv', o='output.tsv', scheduler_address=None, seed=None, tf='./data/transcription_factors.tsv')
+arguments valid
+
+reading expression matrix from "./data/net30tf.states.tsv"
+expression matrix shape: (83, 477)
+expression matrix read in 0.02308201789855957 seconds
+
+reading transcription factors from "./data/transcription_factors.tsv"
+30 transcription factors in common with expression matrix
+
+inferring network with GRNBoost2
+no scheduler address specified, continuing with Dask LocalCluster
+network inference completed in 23.283141136169434 seconds
+network written to "output.tsv"
+
+wall time: 23.33200216293335 seconds

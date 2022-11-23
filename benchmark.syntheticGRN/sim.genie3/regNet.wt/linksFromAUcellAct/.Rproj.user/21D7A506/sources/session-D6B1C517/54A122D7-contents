@@ -1,0 +1,18 @@
+
+
+
+tmp1.df <- read.delim(file = '../../regdb.00/linksFromAUcellAct/output.tsv', sep = '\t') 
+tmp2.df  <- read.delim(file = './output.tsv', sep = '\t') 
+
+
+tmp.df <- rbind(tmp1.df[,c(2,3)], tmp2.df[,c(2,3)]) 
+
+dupStatus <- duplicated(tmp.df)
+
+sum(dupStatus) # 870
+
+dim(tmp2.df) # 870
+dim(tmp1.df) # 870
+
+
+

@@ -1,0 +1,26 @@
+{
+    "id": "224D0747",
+    "path": "~/research/netact/benchmark/combAna/link.inference/creatFigs4panelabc.R",
+    "project_path": "creatFigs4panelabc.R",
+    "type": "r_source",
+    "hash": "69246085",
+    "contents": "",
+    "dirty": false,
+    "created": 1661614227903.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "322,0",
+        "scrollLine": "301"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1661621611,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1661621611024,
+    "read_only": false,
+    "read_only_alternatives": []
+}
